@@ -57,21 +57,11 @@ func generateRandomNumber() int {
 }
 
 func computeGuess(guess, numberToGuess, tryCount *int) (string, bool) {
-	if *guess == *numberToGuess {
-		return fmt.Sprintf("Congratulations! You guessed the number in %d tries.\n", *tryCount), true
-	}
-
-	if (*guess - *numberToGuess) >= 5 {
-		return "You're cold, try again!", false
-	}
-
-	if (*guess - *numberToGuess) >= 3 {
-		return "You're warm, try again!", false
-	}
-
-	if (*guess - *numberToGuess) >= 1 {
-		return "You're hot, try again!", false
-	}
-
-	return "You're very hot, try again!", false
+  switch {
+    case *guess == *numberToGuess: return fmt.Sprintf("Congratulations! You guessed the number in %d tries.\n", *tryCount), true
+    case (*guess - *numberToGuess) >= 5: return "You're cold, try again!", false
+    case (*guess - *numberToGuess) >= 3: return "You're warm, try again!", false
+    case (*guess - *numberToGuess) >= 1: return "You're hot, try again!", false
+    default: return "Wrong nuess", false  
+  }
 }
